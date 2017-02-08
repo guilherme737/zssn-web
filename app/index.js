@@ -12,7 +12,9 @@ require('angular');
 require('angular-animate');
 require('angular-resource');
 require('angular-route');
+require('angular-local-storage');
 //require('angular-selectizejs');
+require('ui-select');
 require('angular-utils-pagination');
 //require('angular-flash-alert');
 require('angular-simple-logger');
@@ -21,5 +23,6 @@ alertify = require('alertifyjs');
 
 // angular
 require('./people/people.module');
-//require('./processo/processo.module');
+require('./exchange/exchange.module');
+require('./login/login.module');
 require('./app.module');

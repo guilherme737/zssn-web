@@ -2,9 +2,9 @@
 
 angular.module('app.people').controller('PeopleController', PeopleController);
 
-PeopleController.$inject = ['$scope', '$route', '$location', '$http', '$timeout', '$log', 'PeopleService', 'CONTEXT', 'uiGmapGoogleMapApi'];
+PeopleController.$inject = ['$scope', '$route', '$location', '$http', '$timeout', '$log', 'PeopleService', 'LoginService', 'uiGmapGoogleMapApi'];
 /* @ngInject */
-function PeopleController($scope, $route, $location, $http, $timeout, $log, People, CONTEXT, uiGmapGoogleMapApi) {
+function PeopleController($scope, $route, $location, $http, $timeout, $log, People, Login, uiGmapGoogleMapApi) {
 
     $scope.person = {
         name: "",
@@ -13,28 +13,35 @@ function PeopleController($scope, $route, $location, $http, $timeout, $log, Peop
         lonlat: null,
         items: ""
     }
-    
-    
+
+
     $scope.items = [
         {name: 'Water', count: 0},
         {name: 'Food', count: 0},
         {name: 'Medication', count: 0},
         {name: 'Ammunition', count: 0}
     ];
-    
+
     $scope.save = function () {
-        
+
         var items = "";
-        
-        angular.forEach($scope.items, function(value, key) {
-            items += value.name + ":" + value.count + ";";          
+
+        angular.forEach($scope.items, function (value, key) {
+            items += value.name + ":" + value.count + ";";
         });
-        
+
         $scope.person.items = items;
-        
-        People.save($scope.person);
-        
-        
+
+        People.save($scope.person).then(function (data) {
+
+            if (!data.message) {
+                //Usuario criado
+                Login.setAuth(data);
+                $location.path('/home');
+            }
+        });
+
+
     }
 
     uiGmapGoogleMapApi.then(function (maps) {
@@ -117,10 +124,10 @@ function PeopleController($scope, $route, $location, $http, $timeout, $log, Peop
     }, 1000);
 
     /*
-    $scope.people = {
-        latitude: $scope.marker.coords.latitude,
-        longitude: $scope.marker.coords.longitude
-    };
-    */
+     $scope.people = {
+     latitude: $scope.marker.coords.latitude,
+     longitude: $scope.marker.coords.longitude
+     };
+     */
 
 }

@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('app.people', [
-    'ngResource',
-    'ngRoute'        
+    'ngResource'
 ]);
 
-require('./people.factory');
+require('./people.service');
 require('./people.controller');
 require('./people.routes');

@@ -2,9 +2,12 @@
 
 angular.module('app', [
     'ngAnimate',
+    'ngRoute',
     'uiGmapgoogle-maps',
+    'LocalStorageModule',
     'angularUtils.directives.dirPagination',
-    'app.people'    
+    'app.people',
+    'app.exchange'
 ]);
 
 angular.module('app').constant('CONTEXT', 'api');
@@ -12,7 +15,7 @@ angular.module('app').constant('CONTEXT', 'api');
 require('./app.config');
 require('./app.run');
 require('./alertify.config');
-require('./services/enum.factory');
+//require('./services/enum.factory');
 require('./services/http.factory');
 require('./components/somente-numeros.directive');
 
