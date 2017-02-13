@@ -1,11 +1,11 @@
 {
   "name": "twds-web",
   "version": "1.0.0",
-  "description": "",
+  "description": "Zombie Social Network Survivor",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "watch": "webpack --config webpack.config.js --watch"    
-  },  
+    "watch": "webpack --config webpack.config.js --watch"
+  },
   "dependencies": {
     "angular-resource": "^1.6.1",
     "bootstrap": "^3.3.7",
@@ -13,7 +13,9 @@
     "angular": "^1.6.1",
     "angular-ui-router": "^0.4.2",
     "moment": "2.17.1",
-    "angular-google-maps": "2.4.1"
+    "angular-google-maps": "2.4.1",
+    "angular-local-storage": "0.5.2",
+    "ngbootbox":"0.1.2"
   },
   "devDependencies": {
     "webpack": "1.13.3"

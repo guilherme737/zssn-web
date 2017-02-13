@@ -1,12 +1,13 @@
 'use strict';
 
-angular.module('app.home').config(PeopleHome);
+angular.module('app.home').config(HomeRoute);
 
-HomeRoute.$inject = ['$routeProvider'];
+HomeRoute.$inject = ['$stateProvider'];
 /* @ngInject */
-function HomeRoute($routeProvider) {
+function HomeRoute($stateProvider) {
 
-    $routeProvider.when('/home', {
+    $stateProvider.state('home', {
+        url: "/home",
         controller: 'HomeController',
         templateUrl: 'home/home.html',
         title: 'Dashboard'

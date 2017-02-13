@@ -2,21 +2,24 @@
 
 angular.module('app.people').config(PeopleRoute);
 
-PeopleRoute.$inject = ['$routeProvider'];
+PeopleRoute.$inject = ['$stateProvider'];
 /* @ngInject */
-function PeopleRoute($routeProvider) {
+function PeopleRoute($stateProvider) {
 
-    $routeProvider.when('/people', {
+    $stateProvider.state({
+        name: 'people',
         controller: 'PeopleController',
         templateUrl: 'people/people.list.html',
         title: 'Search people'
-    });
-    $routeProvider.when('/people/new', {
+        
+    }).state({
+        name: 'people/new',
         controller: 'PeopleController',
         templateUrl: 'people/people.form.html',
         title: 'Register people'
-    });
-    $routeProvider.when('/people/:id', {
+        
+    }).state({
+        name: 'people/:id',
         controller: 'PeopleController',
         templateUrl: 'people/people.form.html',
         title: 'Edit people'

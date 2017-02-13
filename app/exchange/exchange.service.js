@@ -8,9 +8,9 @@
     function ExchangeService($http, $rootScope, localStorageService) {
         var service = {};
 
-        $rootScope.peopleId = localStorageService.get('user').id;
+        $rootScope.personId = localStorageService.get('user') ? localStorageService.get('user').id : null;
 
-        $rootScope.peopleName = localStorageService.get('user').name;
+        $rootScope.personName = localStorageService.get('user') ? localStorageService.get('user').name : null; ;
 
         service.getAllPeople = getAllPeople;
         
@@ -37,8 +37,8 @@
         }
         function getPeopleById(id) {
             
-            return $http.get('http://zssn-backend-example.herokuapp.com/api/people/' + $rootScope.meuId)
-                    .then(handleSuccess, handleError('Error getting people by id'));
+            return $http.get('http://zssn-backend-example.herokuapp.com/api/people/' + $rootScope.personId)
+                    .then(handleSuccess, handleError('Error getting person by id'));
         }
         function updatePeople(user) {
             
@@ -53,7 +53,7 @@
         
         function getMyItems() {
             
-            return $http.get('http://zssn-backend-example.herokuapp.com/api/people/' + $rootScope.meuId + '/properties')
+            return $http.get('http://zssn-backend-example.herokuapp.com/api/people/' + $rootScope.personId + '/properties')
                     .then(handleSuccess, handleError('Error getting people by id'));
         }
         
@@ -70,7 +70,7 @@
         
         function setInfected(infected) {
             
-            return $http.post('http://zssn-backend-example.herokuapp.com/api/people/' + $rootScope.peopleId + '/report_infection',
+            return $http.post('http://zssn-backend-example.herokuapp.com/api/people/' + $rootScope.personId + '/report_infection',
                     {
                         infected: infected,
                         id: $rootScope.peopleId

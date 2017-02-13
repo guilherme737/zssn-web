@@ -1,16 +1,20 @@
 'use strict';
 
 angular.module('app', [
-    'ngAnimate',
-    'ngRoute',
-    'uiGmapgoogle-maps',
-    'LocalStorageModule',
-    'angularUtils.directives.dirPagination',
+    'ngAnimate',    
+    'ui.router',
+    'ngSanitize',
+//    require('angular-sanitize'),
+    'ngBootbox',
+    'uiGmapgoogle-maps',    
+    'LocalStorageModule',    
+    'app.auth',
+    'app.home',
     'app.people',
     'app.exchange'
 ]);
 
-angular.module('app').constant('CONTEXT', 'api');
+//angular.module('app').constant('CONTEXT', 'api');
 
 require('./app.config');
 require('./app.run');

@@ -2,19 +2,26 @@
 
 angular.module('app').run(AppRun);
 
-AppRun.$inject = ['$rootScope', 'HttpService'];
+AppRun.$inject = ['$rootScope', 'HttpService','$state', "$stateParams"];
 /* @ngInject */
-function AppRun($rootScope, HttpService) {
+function AppRun($rootScope, HttpService, $state, $stateParams) {
 
+    $rootScope.$state = $state;
+    
+    $rootScope.$stateParams = $stateParams;
+    
     $rootScope.httpService = HttpService;
 
-    $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-        // Obtém o atributo "title" da rota atual
-        if (current.hasOwnProperty('$$route')) {
+    $rootScope.$on('$stateChangeSuccess', function (event, current, fromState, fromParams) {
+        
+        $state.current = current;
+        // get attrib "title" to actual route
+        if (current.hasOwnProperty('$$state')) {
             $rootScope.title = current.$$route.title;
         }
 
-        // Remove da tela a <div> de mensagens
-        //Flash.dismiss();
     });
+    
+    $state.transitionTo('home');    
+    
 }

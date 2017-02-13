@@ -1,20 +1,10 @@
 'use strict';
 
-
-//angular.module('app.people').factory('People', People);
-//
-//People.$inject = ['$resource', 'CONTEXT'];
-///* @ngInject */
-//function People($resource, CONTEXT) {
-//
-//    return $resource(CONTEXT + '/people/:id');
-//}
-
 angular.module('app.people').factory('PeopleService', PeopleService);
 
-PeopleService.$inject = ['$http', 'CONTEXT'];
+PeopleService.$inject = ['$http'];
 /* @ngInject */
-function PeopleService($http, CONTEXT) {
+function PeopleService($http) {
 
     var service = {
       save: save,  
@@ -45,11 +35,15 @@ function PeopleService($http, CONTEXT) {
 
     function getPeopleById(id) {
 
+        return $http.get('http://zssn-backend-example.herokuapp.com/api/people/'+id).then(handleSuccess, handleError('Error getting user by id'));
+
+        /*
         return $http({
             method: 'GET', 
             url: 'http://zssn-backend-example.herokuapp.com/api/people/' + id + '.json', 
             params: {}
         });
+        */
     }
     
     function handleSuccess(res) {

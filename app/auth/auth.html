@@ -1,0 +1,76 @@
+<header ng-controller="AuthController as vm">
+<div class="navbar-more-overlay"></div>
+<nav class="navbar navbar-inverse navbar-fixed-top animate">
+    <div class="container navbar-more visible-xs">			
+        
+    </div>
+    
+    <div class="container">        
+        <div ng-show="isAuth"> 
+            <ul class="nav navbar-nav navbar-right mobile-bar">
+                <li>
+                    <a ui-sref="home">
+                        <span class="menu-icon fa fa-home"></span>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref="people">
+                        <span class="menu-icon fa fa-handshake-o"></span>
+                        People
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref="exchange">
+                        <span class="menu-icon fa fa-handshake-o"></span>
+                        Exchange
+                    </a>
+                </li>
+                <li>
+                    <a href="#" ng-click="logout()">
+                        <span class="menu-icon fa fa-info"></span>                    
+                        Logout
+                    </a>
+                </li>                
+                <!--            
+                <li>
+                    <a href="#">
+                        <span class="menu-icon fa fa-phone"></span>						
+                        <span class="hidden-xs">Contact Us</span>
+                        <span class="visible-xs">Contact</span>
+                    </a>
+                </li>
+                <li class="visible-xs">
+                    <a href="#navbar-more-show">
+                        <span class="menu-icon fa fa-bars"></span>
+                        More
+                    </a>
+                </li>
+                -->
+            </ul>
+        </div>
+        <div ng-show="!isAuth">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="home">ZSSN</a>
+            </div>
+
+            <div id="navbar" class="navbar-collapse collapse">
+                <form class="navbar-form navbar-right" id="login" ng-submit="login.$valid;login(user)" style="margin-right:20px;">
+                    <div class="form-group">
+                        <input type="text" placeholder="#ID" class="form-control" ng-model="user.identificacao" autocomplete="on" required>
+                    </div>
+                    <button type="submit" class="btn btn-custom">Sign in <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</nav>
+
+</header>

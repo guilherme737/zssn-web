@@ -1,16 +1,101 @@
+<h1>DASHBOARD</h1>
+
 <div class="row">
-    <div class="col-md-3">
-        
+    <div class="col-md-6">
+        <!-- 1 -->
+        <div class="info-box bg-red">
+            <span class="info-box-icon"><i class="fa fa-hand-paper-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Average Infected People</span>
+                <span class="info-box-number">{{averageInfectedPeople}}</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: {{averageInfectedPeople}}"></div>
+                </div>
+                <span class="progress-description">
+
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
     </div>
-    <div class="col-md-3">
-        
+    <div class="col-md-6">
+        <!-- 2 -->
+        <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-hand-peace-o "></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Average Non-Infected People</span>
+                <span class="info-box-number">{{averageNonInfectedPeople}}</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: {{averageNonInfectedPeople}}"></div>
+                </div>
+                <span class="progress-description">
+
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
     </div>
-    <div class="col-md-3">
-        
+    <div class="col-md-4">
+        <!-- 3 -->
+        <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="fa fa-hand-o-right"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Average Quantity Item By Person</span>
+                <span class="info-box-number">{{averageQuantityItemByPerson}} ITEMS</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: {{averageQuantityItemByPerson}}"></div>
+                </div>
+                <span class="progress-description">
+
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
     </div>
-    <div class="col-md-3">
-        
+    <div class="col-md-4">
+
+
+        <!-- 4 -->
+        <div class="info-box bg-green-active">
+            <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Avg Qty Item By Non-Infected Person</span>
+                <span class="info-box-number">{{averageQuantityItemByPersonNonInfected}} ITEMS</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: {{averageQuantityItemByPersonNonInfected}}"></div>
+                </div>
+                <span class="progress-description">
+
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <!-- 5 -->
+        <div class="info-box bg-yellow">
+            <span class="info-box-icon"><span class="fa fa-money"></span></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Total Lost Points</span>
+                <span class="info-box-number">{{totalLostPoints}} POINTS</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: {{totalLostPoints}}"></div>
+                </div>
+                <span class="progress-description">
+
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+
     </div>
 </div>
+
+
+
+
+
+
 
 

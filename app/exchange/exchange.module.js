@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('app.exchange', [
-        'ui.select', 'ngResource',
+        'ui.select', 'ngResource'
     ]);
     
     require('./exchange.service');

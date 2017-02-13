@@ -2,10 +2,13 @@
 
 angular.module('app').config(AppRoute);
 
-AppRoute.$inject = ['$routeProvider', '$httpProvider', 'paginationTemplateProvider', 'uiGmapGoogleMapApiProvider'];
+AppRoute.$inject = ['$stateProvider', '$urlRouterProvider','$httpProvider', 'uiGmapGoogleMapApiProvider'];
 /* @ngInject */
-function AppRoute($routeProvider, $httpProvider, paginationTemplateProvider, GoogleMapApi) {
-
+function AppRoute($stateProvider, $urlRouterProvider, $httpProvider, GoogleMapApi) {
+    
+    $urlRouterProvider.otherwise('/home');
+    
+    /*
     $routeProvider.when('/', {
         templateUrl: 'home/home.html',
         title: 'Home'
@@ -15,6 +18,7 @@ function AppRoute($routeProvider, $httpProvider, paginationTemplateProvider, Goo
         title: '404'
     });
     $routeProvider.otherwise({redirectTo: '/pagenotfound'});
+    */
 
     $httpProvider.interceptors.push(['$q', 'HttpService', function ($q, HttpService) {
         return {
@@ -49,7 +53,7 @@ function AppRoute($routeProvider, $httpProvider, paginationTemplateProvider, Goo
         };
     }]);
 
-    paginationTemplateProvider.setPath('node_modules/angular-utils-pagination/dirPagination.tpl.html');
+    //paginationTemplateProvider.setPath('node_modules/angular-utils-pagination/dirPagination.tpl.html');
 
     GoogleMapApi.configure({
           key: 'AIzaSyCkd3Kf6BWYxxmQaKUU2OTRUOzmhvU3bSc',

@@ -2,11 +2,12 @@
 
 angular.module('app.exchange').config(ExchangeRoute);
 
-ExchangeRoute.$inject = ['$routeProvider'];
+ExchangeRoute.$inject = ['$stateProvider'];
 /* @ngInject */
-function ExchangeRoute($routeProvider) {
+function ExchangeRoute($stateProvider) {
 
-    $routeProvider.when('/exchange', {
+    $stateProvider.state('exchange',{
+        //name : 'exchange',
         controller: 'ExchangeController',
         templateUrl: 'exchange/exchange.html',
         title: 'Exchange Items'

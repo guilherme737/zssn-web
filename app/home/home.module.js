@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('app.home', [
-    'ngResource',
-    'ngRoute'        
+    'ngResource',    
 ]);
 
-require('./home.factory');
+require('./home.service');
 require('./home.controller');
 require('./home.routes');

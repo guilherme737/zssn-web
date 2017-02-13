@@ -1,74 +1,181 @@
-<div ng-include src="'app/login/login.view.html'"></div>
+<div ng-include src="'auth/auth.html'"></div>
 <!-- Area de troca -->
-<div class="troca-area col-md-6">
-	<h1>Area de troca de items</h1>
-		<form class="form-horizontal">
-			<div class="form-group">
-				<div class="col-md-9 buscaInfectado">
-					<label>Encontre o sobrevivente para realizar a troca</label>
-					<ui-select ng-model="trocaPerson.nome" theme="bootstrap">
-					<ui-select-match placeholder="Buscar pelo nome">{{$select.selected.name}}</ui-select-match> 
-					<ui-select-choices repeat="item in todosSobreviventes | filter: $select.search |limitTo : 20 ">
-					<div ng-bind-html="item.name | highlight: $select.search"></div>
-					<small>Idade: <span ng-bind-html="item.age  | highlight: $select.search"></span></small>
-					</ui-select-choices>
-				</ui-select>	  	
-				</div>
-			</div>
-			<div class="form-group" style="margin-top:50px;">
-				<div class="col-md-1" >	</div>
-				<div class="col-md-4 painel" ng-class="{'painel-success': pontosPagamento == pontosCompra}">
-					<h4 style="text-align:center;">Preciso</h4>
-					<div class="row">
-						<div ng-repeat="item in itemsCompra">	
-							<a ng-click="item.count = item.count + 1;addPontosCompra(item.name)">					
-								<div class="col-xs-6 col-sm-3 {{item.name}}"><h2>{{item.count}}</h2></div>	
-							</a>		
-						</div>
-					</div>
-					<h4 ng-class="{'pontos-success': pontosPagamento == pontosCompra}">Total de Pontos: <strong>{{pontosCompra}}</strong></h4>
-				</div>
-				<div class="col-md-2" ></div>
-				<div class="col-md-4 painel" ng-class="{'painel-success': pontosPagamento == pontosCompra}"  >
-					<h4 style="text-align:center;">Pagamento</h4>
-					<div class="row">
-						<div ng-repeat="item in itemsPagamento">
-							<a ng-click="item.count = item.count + 1;addPontosPagamento(item.name)">		
-								<div class="col-xs-6 col-sm-3 {{item.name}}"><h2>{{item.count}}</h2></div>
-							</a>		
-						</div>
-					</div>
-					<h4 ng-class="{'pontos-success': pontosPagamento == pontosCompra}">Total de Pontos: <strong>{{pontosPagamento}}</strong></h4>
-				</div>
-				<div class="col-md-1" ></div>
-		</div>
+<div class="col-md-7">
 
-		<div class="botoes col-md-12 text-center">   	
-			<button type="submit" class="btn btn-custom" ng-click="limparItems()"><span class="glyphicon glyphicon-share" aria-hidden="true"> </span> Limpar items</button>
-			<button type="submit" class="btn btn-custom" ng-click="realizarTroca()"><span class="glyphicon glyphicon-share" aria-hidden="true"> </span> Realizar Troca</button>
-		</div>
-	</form>
+    <fieldset>
+            
+        <legend><h1>Items exchange area</h1></legend>
+    
+        <form class="form-horizontal">
+
+            <div class="form-group">
+
+                <div class="col-md-9">
+
+                    <label>Search a survivor for exchange</label>
+
+                    <ui-select ng-model="personExchange.nome" theme="node_modules/ui-select/src/bootstrap">
+
+                        <ui-select-match placeholder="Search for name">{{$select.selected.name}}</ui-select-match> 
+
+                        <ui-select-choices repeat="survivor in survivors | filter: $select.search |limitTo : 20 "
+                                           ui-disable-choice="survivor['infected?'] == true" >
+                            <div ng-bind-html="survivor.name | highlight: $select.search"></div>
+                            <small>Age: <span ng-bind-html="survivor.age  | highlight: $select.search"></span></small><br>
+                            <small ng-show="survivor['infected?'] == true">INFECTED</small>
+
+                    </ui-select-choices>
+
+                    </ui-select>	  	
+
+                </div>
+
+            </div>
+
+            <div class="form-group" style="margin-top:50px;">
+
+                <div class="col-md-4 painel" ng-class="{'painel-success': pontosPagamento == pontosCompra}">
+
+                    <h4 style="text-align:center;">Wanted</h4>
+
+                    <div class="row" ng-repeat="item in itemsWanted">
+
+                        <div class="form-group">
+
+                            <label>{{item.name}}</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-danger btn-number"                                           
+                                            ng-click="item.count = item.count > 0 ? item.count - 1 : 0; remWantedPoints(item.name)">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </span>
+
+                                <input type="text" ng-model="item.count" class="form-control">
+
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success btn-number" 
+                                            ng-click="item.count = item.count + 1; addWantedPoints(item.name)">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <h4 ng-class="{'pontos-success': paymentPoints == wantedPoints}">Total Points: <strong>{{wantedPoints}}</strong></h4>
+
+                </div>
+
+                <div class="col-md-offset-2 col-md-4 painel" ng-class="{'painel-success': paymentPoints == wantedPoints}"  >
+
+                    <h4 style="text-align:center;">Payment</h4>
+
+                    <div class="row" ng-repeat="item in itemsPayment">
+
+                        <div class="form-group">
+
+                            <label>{{item.name}}</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-danger btn-number"                                           
+                                            ng-click="item.count = item.count > 0 ? item.count - 1 : 0;remPaymentPoints(item.name)">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </span>
+
+                                <input type="text" ng-model="item.count" class="form-control">
+
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success btn-number" 
+                                            ng-click="item.count = item.count + 1;addPaymentPoints(item.name)">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <h4 ng-class="{'pontos-success': paymentPoints == wantedPoints}">Total Points: <strong>{{paymentPoints}}</strong></h4>
+
+                </div>
+
+                <div class="col-md-1" ></div>
+
+            </div>
+
+            <div class="botoes col-md-10 text-center">  
+
+                <button type="submit" class="btn btn-custom" ng-click="clearItems()"><span class="glyphicon glyphicon-share" aria-hidden="true"> </span> Clear items</button>
+
+                <button type="submit" class="btn btn-custom" ng-click="makeExchange()"><span class="glyphicon glyphicon-share" aria-hidden="true"> </span> Make Exchange</button>
+
+            </div>
+
+        </form>
+    </fieldset>
+
 </div>
 
 <!-- Meu inventario -->
-<div class="troca-inventario col-md-5">
-	<div class="row">   
-		<h1>Meu inventário</h1>
-		<div class="form-group">
-			<div class="col-md-12 painel">
-				<div class="row">
-					<div ng-repeat="item in inventario">
-						<div class="col-xs-3 col-sm-3 {{item.item.name}}" ng-class="{'erro': item.quantity == 1}"><h2>{{item.quantity}}</h2></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-12" style="text-align:right;padding-top:40px;">
-				<h4>Total de Pontos: <strong>{{meusPontosTotais}}</strong></h4>
-			</div>
-		</div>
-	</div>
+<div class="col-md-5">
+
+    <div class="row">  
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                MY ITEMS
+            </div>
+            <div class="panel-body">
+                
+
+                <div class="form-group">
+
+                    <div class="col-md-12 painel">
+
+                        <div class="row">
+
+                            <div ng-repeat="item in inventario">
+
+                                <div class="col-xs-3 col-sm-3">
+
+                                    {{item.item.name}}
+                                    <h2>{{item.quantity}}</h2>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-sm-12" style="text-align:right;padding-top:10px;">
+
+                        <h4>Total Points: <strong>{{meusPontosTotais}}</strong></h4>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
 

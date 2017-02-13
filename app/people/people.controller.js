@@ -2,9 +2,9 @@
 
 angular.module('app.people').controller('PeopleController', PeopleController);
 
-PeopleController.$inject = ['$scope', '$route', '$location', '$http', '$timeout', '$log', 'PeopleService', 'LoginService', 'uiGmapGoogleMapApi'];
+PeopleController.$inject = ['$scope', '$state', '$location', '$http', '$timeout', '$log', 'PeopleService', 'AuthService', 'uiGmapGoogleMapApi'];
 /* @ngInject */
-function PeopleController($scope, $route, $location, $http, $timeout, $log, People, Login, uiGmapGoogleMapApi) {
+function PeopleController($scope, $state, $location, $http, $timeout, $log, People, Auth, uiGmapGoogleMapApi) {
 
     $scope.person = {
         name: "",
@@ -36,7 +36,7 @@ function PeopleController($scope, $route, $location, $http, $timeout, $log, Peop
 
             if (!data.message) {
                 //Usuario criado
-                Login.setAuth(data);
+                Auth.setAuth(data);
                 $location.path('/home');
             }
         });
@@ -45,7 +45,6 @@ function PeopleController($scope, $route, $location, $http, $timeout, $log, Peop
     }
 
     uiGmapGoogleMapApi.then(function (maps) {
-
 
     });
 
