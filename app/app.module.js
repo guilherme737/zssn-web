@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('app', [
-    //'ngAnimate',    
+angular.module('app', [    
     'ui.router',
     'ngSanitize',
     'ngBootbox',
@@ -15,7 +14,6 @@ angular.module('app', [
 
 require('./app.config');
 require('./app.run');
-//require('./alertify.config');
 
 require('./services/http.factory');
 require('./components/somente-numeros.directive');
