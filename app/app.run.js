@@ -22,6 +22,6 @@ function AppRun($rootScope, HttpService, $state, $stateParams) {
 
     });
     
-    $state.transitionTo('home');    
+    //state.transitionTo('home');    
     
 }

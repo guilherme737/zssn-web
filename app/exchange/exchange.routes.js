@@ -7,7 +7,7 @@ ExchangeRoute.$inject = ['$stateProvider'];
 function ExchangeRoute($stateProvider) {
 
     $stateProvider.state('exchange',{
-        //name : 'exchange',
+        url : '/exchange',
         controller: 'ExchangeController',
         templateUrl: 'exchange/exchange.html',
         title: 'Exchange Items'

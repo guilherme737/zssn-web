@@ -2,9 +2,9 @@
 
 angular.module('app.people').controller('PeopleController', PeopleController);
 
-PeopleController.$inject = ['$scope', '$state', '$location', '$http', '$timeout', '$log', 'PeopleService', 'AuthService', 'uiGmapGoogleMapApi'];
+PeopleController.$inject = ['$scope', '$state', '$location', '$http', '$timeout', '$log', 'PeopleService', 'AuthService', 'uiGmapGoogleMapApi', '$ngBootbox'];
 /* @ngInject */
-function PeopleController($scope, $state, $location, $http, $timeout, $log, People, Auth, uiGmapGoogleMapApi) {
+function PeopleController($scope, $state, $location, $http, $timeout, $log, People, Auth, uiGmapGoogleMapApi, $ngBootbox) {
 
     $scope.person = {
         name: "",
@@ -35,14 +35,48 @@ function PeopleController($scope, $state, $location, $http, $timeout, $log, Peop
         People.save($scope.person).then(function (data) {
 
             if (!data.message) {
-                //Usuario criado
+
                 Auth.setAuth(data);
-                $location.path('/home');
+                
+                $window.location.reload();
             }
         });
+    };
 
+    /** Report Infection Operations **/
 
+    $scope.person = {};
+
+    People.getAll().then(function (persons) {
+        $scope.persons = persons;
+    });
+
+    $scope.setInfected = function (data) {
+
+        if (data.infected != null) {
+
+            var id = data.infected.location.replace('http://zssn-backend-example.herokuapp.com/api/people/', '');
+
+            People.setInfected(id).then(function (response) {
+                
+                if (response) {
+                    
+                    $ngBootbox.alert('Survivor already reported by you.');
+                    
+                } else {
+                    
+                    $ngBootbox.alert('Survivor reported successfully.');                    
+                }
+                
+            });
+        }
+        //Se esqueceu de escolher o sobrevivente infectado, exibe o alerta
+        else {
+            
+            $ngBootbox.alert('Select a survivor!');            
+        }
     }
+
 
     uiGmapGoogleMapApi.then(function (maps) {
 
@@ -59,8 +93,11 @@ function PeopleController($scope, $state, $location, $http, $timeout, $log, Peop
     //$scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4 };
 
     $scope.options = {scrollwheel: false};
+
     $scope.coordsUpdates = 0;
+
     $scope.dynamicMoveCtr = 0;
+
     $scope.marker = {
         id: 0,
         coords: {

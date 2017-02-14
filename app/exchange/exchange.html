@@ -14,7 +14,7 @@
 
                     <label>Search a survivor for exchange</label>
 
-                    <ui-select ng-model="personExchange.nome" theme="node_modules/ui-select/src/bootstrap">
+                    <ui-select ng-model="personExchange.person" theme="node_modules/ui-select/src/bootstrap">
 
                         <ui-select-match placeholder="Search for name">{{$select.selected.name}}</ui-select-match> 
 
@@ -34,7 +34,7 @@
 
             <div class="form-group" style="margin-top:50px;">
 
-                <div class="col-md-4 painel" ng-class="{'painel-success': pontosPagamento == pontosCompra}">
+                <div class="col-md-4 painel">
 
                     <h4 style="text-align:center;">Wanted</h4>
 
@@ -68,11 +68,11 @@
 
                     </div>
 
-                    <h4 ng-class="{'pontos-success': paymentPoints == wantedPoints}">Total Points: <strong>{{wantedPoints}}</strong></h4>
+                    <h4>Total Points: <strong>{{wantedPoints}}</strong></h4>
 
                 </div>
 
-                <div class="col-md-offset-2 col-md-4 painel" ng-class="{'painel-success': paymentPoints == wantedPoints}"  >
+                <div class="col-md-offset-2 col-md-4 painel" >
 
                     <h4 style="text-align:center;">Payment</h4>
 
@@ -106,7 +106,7 @@
 
                     </div>
 
-                    <h4 ng-class="{'pontos-success': paymentPoints == wantedPoints}">Total Points: <strong>{{paymentPoints}}</strong></h4>
+                    <h4>Total Points: <strong>{{paymentPoints}}</strong></h4>
 
                 </div>
 

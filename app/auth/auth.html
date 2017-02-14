@@ -7,6 +7,12 @@
     
     <div class="container">        
         <div ng-show="isAuth"> 
+            
+            <div class="navbar-header hidden-xs">                
+                <a class="navbar-brand" ui-sref="home">#ID: 8eadf012-67d8-4bda-951d-ea81f5a06636</a>
+            </div>
+            
+            
             <ul class="nav navbar-nav navbar-right mobile-bar">
                 <li>
                     <a ui-sref="home">
@@ -15,9 +21,9 @@
                     </a>
                 </li>
                 <li>
-                    <a ui-sref="people">
+                    <a ui-sref="people-report-infected">
                         <span class="menu-icon fa fa-handshake-o"></span>
-                        People
+                        Report infection
                     </a>
                 </li>
                 <li>
@@ -61,9 +67,9 @@
             </div>
 
             <div id="navbar" class="navbar-collapse collapse">
-                <form class="navbar-form navbar-right" id="login" ng-submit="login.$valid;login(user)" style="margin-right:20px;">
+                <form class="navbar-form navbar-right" id="login" ng-submit="login.$valid;login(person)" style="margin-right:20px;">
                     <div class="form-group">
-                        <input type="text" placeholder="#ID" class="form-control" ng-model="user.identificacao" autocomplete="on" required>
+                        <input type="text" placeholder="#ID" class="form-control" ng-model="person.identificacao" autocomplete="on" required>
                     </div>
                     <button type="submit" class="btn btn-custom">Sign in <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
                 </form>

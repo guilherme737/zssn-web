@@ -6,22 +6,22 @@ PeopleRoute.$inject = ['$stateProvider'];
 /* @ngInject */
 function PeopleRoute($stateProvider) {
 
-    $stateProvider.state({
-        name: 'people',
+    $stateProvider.state('people/new',{
+        name: '/people/new',
         controller: 'PeopleController',
-        templateUrl: 'people/people.list.html',
-        title: 'Search people'
-        
-    }).state({
-        name: 'people/new',
-        controller: 'PeopleController',
-        templateUrl: 'people/people.form.html',
+        templateUrl: 'people/people.html',
         title: 'Register people'
         
-    }).state({
-        name: 'people/:id',
+    }).state('people.edit', {
+        url: '/people/:id',
         controller: 'PeopleController',
-        templateUrl: 'people/people.form.html',
+        templateUrl: 'people/people.html',
         title: 'Edit people'
+        
+    }).state('people-report-infected',{
+        url: '/people/people-report-infected',
+        controller: 'PeopleController',
+        templateUrl: 'people/people-report-infected.html',
+        title: 'Report Infection'
     });
 }

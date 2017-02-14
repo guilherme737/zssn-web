@@ -4,7 +4,6 @@ angular.module('app', [
     'ngAnimate',    
     'ui.router',
     'ngSanitize',
-//    require('angular-sanitize'),
     'ngBootbox',
     'uiGmapgoogle-maps',    
     'LocalStorageModule',    
@@ -14,12 +13,10 @@ angular.module('app', [
     'app.exchange'
 ]);
 
-//angular.module('app').constant('CONTEXT', 'api');
-
 require('./app.config');
 require('./app.run');
-require('./alertify.config');
-//require('./services/enum.factory');
+//require('./alertify.config');
+
 require('./services/http.factory');
 require('./components/somente-numeros.directive');
 

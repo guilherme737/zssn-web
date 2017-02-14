@@ -5,10 +5,10 @@
             .module('app.exchange')
             .controller('ExchangeController', ExchangeController);
 
-    function ExchangeController($scope, ExchangeService, localStorageService, $ngBootbox) {
+    function ExchangeController($scope, $state, ExchangeService, PeopleService, localStorageService, $ngBootbox) {
 
-        //Declaração de variaveis utilizadas no painel de troca
         $scope.wantedPoints = 0;
+
         $scope.paymentPoints = 0;
 
         $scope.personExchange = {};
@@ -28,21 +28,24 @@
 
         $scope.itemQuantidade1 = true;
         
-        //Busca na API os items atuais do sobrevivente autenticado
         ExchangeService.getMyItems().then(function (items) {
+            
             $scope.inventario = items;
+            
             $scope.meusPontosTotais = 0;
 
             angular.forEach(items, function (value, key) {
+                
                 if (value.quantity == 1) {
                     $scope.itemQuantidade1 = false;
                 }
+                
                 $scope.meusPontosTotais += (value.item.points * value.quantity);
+                
             });
         });
 
-        //Busca todos os sobreviventes para utilizar na busca por nomes
-        ExchangeService.getAllPeople().then(function (survivors) {
+        PeopleService.getAll().then(function (survivors) {
             $scope.survivors = survivors;
         });
 
@@ -146,8 +149,8 @@
             }
         };
 
-        //Limpa items da area de troca
         $scope.clearItems = function () {
+            
             $scope.itemsWanted = [
                 {name: 'Water', count: 0},
                 {name: 'Food', count: 0},
@@ -160,25 +163,23 @@
                 {name: 'Medication', count: 0},
                 {name: 'Ammunition', count: 0}
             ];
+            
             $scope.wantedPoints = 0;
             $scope.paymentPoints = 0;
         };
 
-        //Função que realiza a troca de items entre sobreviventes
         $scope.makeExchange = function () {
-            //Variaveis locais	
+
             var data = {};
             var itemsWanted = "";
             var itemsPayment = "";
             
-            var meuNome = localStorageService.get('user').name;
+            var myName = localStorageService.get('user').name;
 
-            //Verifica se selecionou alum sobrevivente para troca
-            if ($scope.personExchange.nome != null) {
-                //Obetem o id desse sobrevivente	
-                var personId = $scope.personExchange.nome.location.replace('http://zssn-backend-example.herokuapp.com/api/people/', '');
+            if ($scope.personExchange.person != null) {
 
-                //Transforma os items atualizado na forma esperada pela API
+                var personId = $scope.personExchange.person.location.replace('http://zssn-backend-example.herokuapp.com/api/people/', '');
+
                 angular.forEach($scope.itemsWanted, function (value, key) {
                     if (value.count != 0) {
                         itemsWanted += (value.name + ':' + value.count + ';');
@@ -191,24 +192,26 @@
                     }
                 });
 
-                //Data post montado, pronto para ser enviado pelo service
-                data = {person_id: personId, consumer: {name: meuNome, pick: itemsWanted, payment: itemsPayment}};
-
+                data = {person_id: personId, consumer: {name: myName, pick: itemsWanted, payment: itemsPayment}};
                 
                 ExchangeService.makeExchange(data).then(function (data) {
+                    
                     if (data == "") {
                         
-                        $ngBootbox.alert('Successfully made exchange!')
+                        $ngBootbox.alert('Successfully made exchange!').then(function () {
+                            $state.reload();
+                        });
                         
                     } else {
-                        $ngBootbox.alert('Failed to make the exchange.')
+                        
+                        $ngBootbox.alert('Failed to make the exchange.');
                     }
                 });
             }
             
             else {
                 
-                $ngBootbox.alert('Error while selecting person. Select a person!')
+                $ngBootbox.alert('Error while selecting person. Select a person!');
                 
             }
         };

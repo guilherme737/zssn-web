@@ -53,3 +53,8 @@ body {
 }
 
 .angular-google-map-container { height: 300px; }
+
+
+.navbar-inverse {
+    background-color: #333333;    
+}
